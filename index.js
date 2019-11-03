@@ -11,7 +11,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	if (message.member.highestRole('Slightly More Intellectual')){
+	if (message.member.hasPermission('DEAFEN_MEMBERS')){
 		if(message.content.startsWith(`%oml`)){
 			myLife++;
 			message.channel.send("There are now " + myLife + " things on my life.")
