@@ -32,9 +32,6 @@ client.on('message', message => {
 			message.channel.send("There are " + myLife + " things on my life right now.")
 		}
 	}
-	else{
-		message.channel.send("You are not the correct rank!")
-	}
 })
 
 client.login(process.env.token);
