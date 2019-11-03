@@ -28,6 +28,9 @@ client.on('message', message => {
 				message.channel.send("Not a valid number!");
 			}
 		}
+		else if(message.content.startsWith(`%count`)){
+			message.channel.send("There are " + myLife + " things on my life right now.")
+		}
 	}
 })
 
