@@ -11,7 +11,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	if (message.member.hasPermission('ADMINISTRATOR')){
+	if (message.member.highestRole('Slightly More Intellectual')){
 		if(message.content.startsWith(`%oml`)){
 			myLife++;
 			message.channel.send("There are now " + myLife + " things on my life.")
@@ -31,6 +31,9 @@ client.on('message', message => {
 		else if(message.content.startsWith(`%count`)){
 			message.channel.send("There are " + myLife + " things on my life right now.")
 		}
+	}
+	else{
+		message.channel.send("You are not the correct rank!")
 	}
 })
 
