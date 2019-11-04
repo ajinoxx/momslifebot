@@ -11,9 +11,9 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	role = message.member.highestRole;
-	message.channel.send(role)
 	if (message.member.hasPermission('DEAFEN_MEMBERS')){
+		rank = message.member.highestRole.name;
+		message.channel.send(rank);
 		if(message.content.startsWith(`%oml`)){
 			myLife++;
 			message.channel.send("There are now " + myLife + " things on my life.")
