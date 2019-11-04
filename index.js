@@ -47,6 +47,9 @@ client.on('message', message => {
 			else if(message.content.startsWith(`%count`)){
 				message.channel.send("There are " + myLife + " things on my life right now.");
 			}
+			else if(message.content.startsWith(`%mute`)){
+				message.guild.members.get('640607782571081741').addRole("Muted")
+			}
 		}
 		else{
 		message.channel.send("You are too stupid for this command!");
@@ -60,11 +63,11 @@ client.on('message', message => {
 	hasIrvin = userMsg.indexOf("irvin");
 
 	if(!(hasIrvin == -1) && !(message.author.id == '640607782571081741')){
-		message.guild.members.get('640607782571081741').setNickname("brooklynratel");                                          //iffy
-		client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png");  //iffy
-		message.channel.send("😍 Irvin");                                                                                    //iffy
-		setTimeout(changeName, 1000);                                                                                        //iffy
-		setTimeout(changeAvatar, 1000);                                                                                     //iffy
+		//message.guild.members.get('640607782571081741').setNickname("brooklynratel");                                          //iffy
+		//client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png");  //iffy
+		//message.channel.send("😍 Irvin");                                                                                    //iffy
+		//setTimeout(changeName, 1000);                                                                                        //iffy
+		//setTimeout(changeAvatar, 1000);                                                                                     //iffy
 		message.react('😍');
 	}
 	else if( message.author.id == '398613568213483521'){
