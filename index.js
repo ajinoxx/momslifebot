@@ -11,6 +11,14 @@ var userMsg;
 var hasIrvin;
 var hasNWord;
 
+function changeName() {
+	message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
+}
+
+function changeAvatar() {
+	client.user.setAvatar(defaultAvatar)
+}
+
 client.once('ready', () => {
 	console.log('Ready!');
 });
@@ -55,8 +63,8 @@ client.on('message', message => {
 		message.guild.members.get('640607782571081741').setNickname("brooklynratel");                                          //iffy
 		client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png");  //iffy
 		message.channel.send("😍 Irvin");                                                                                    //iffy
-		setTimeout(message.guild.members.get('640607782571081741').setNickname("Irvin's Mom"), 1000);                        //iffy
-		setTimeout(client.user.setAvatar(defaultAvatar), 1000);
+		setTimeout(changeName, 1000);                                                                                        //iffy
+		setTimeout(changeAvatar, 1000);                                                                                     //iffy
 		message.react('😍');
 	}
 	else if( message.author.id == '398613568213483521'){
