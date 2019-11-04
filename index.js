@@ -49,7 +49,7 @@ client.on('message', message => {
 
 	hasIrvin = userMsg.indexOf("irvin")
 
-	if(!(hasIrvin == -1) && !(message.member('640607782571081741'))){
+	if(!(hasIrvin == -1) && !(message.author.id == '640607782571081741')){
 		message.guild.members.get('640607782571081741').setNickname("brooklynratel");
 		message.react('🍆')
 		message.guild.members.get('640607782571081741').setNickname("Irvin's Mom");
