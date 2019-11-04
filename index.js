@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const modRole = "&627267659364302848";
+const modRole = 627267659364302848;
 var myLife = 0;
 var userMsg;
 var spaceIndex;
