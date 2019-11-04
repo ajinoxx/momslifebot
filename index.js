@@ -46,13 +46,13 @@ client.on('message', message => {
 	if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
 		message.channel.send("Hey " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
 	}
-	
+
 	hasIrvin = userMsg.indexOf("irvin")
 
 	if(!(hasIrvin == -1)){
-		message.guild.members.get(bot.user.id).setNickname("brooklynratel");
+		message.guild.members.get('640607782571081741').setNickname("brooklynratel");
 		message.react('🍆')
-		message.guild.members.get(bot.user.id).setNickname("Irvin's Mom");
+		message.guild.members.get('640607782571081741').setNickname("Irvin's Mom");
 	}
 })
 
