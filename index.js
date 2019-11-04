@@ -52,16 +52,19 @@ client.on('message', message => {
 	hasIrvin = userMsg.indexOf("irvin");
 
 	if(!(hasIrvin == -1) && !(message.author.id == '640607782571081741')){
-		//message.guild.members.get('640607782571081741').setNickname("brooklynratel");
-		//client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png");
-		//message.channel.send("😍 Irvin");
-		//message.guild.members.get('640607782571081741').setNickname("Irvin's Mom");
-		//client.user.setAvatar(defaultAvatar);
+		message.guild.members.get('640607782571081741').setNickname("brooklynratel");                                          //iffy
+		client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png");  //iffy
+		message.channel.send("😍 Irvin");                                                                                    //iffy
+		setTimeout(message.guild.members.get('640607782571081741').setNickname("Irvin's Mom"), 1000);                        //iffy
+		setTimeout(client.user.setAvatar(defaultAvatar), 1000);
+		message.react('😍');
+	}
+	else if( message.author.id == '398613568213483521'){
 		message.react('😍');
 	}
 
 	hasNWord = userMsg.indexOf("nig")
-	
+
 	if(!(hasNWord == -1)){
 		message.react('👎🏿')
 	}
