@@ -6,12 +6,14 @@ var userMsg;
 var spaceIndex;
 var num;
 var hasModRole;
+var userMsg;
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
 client.on('message', message => {
+	userMsg = message.content.toLowerCase();
 	if (message.content.startsWith(`%`)) {
 		hasModRole = message.member.roles.has(modRole);
 		if (hasModRole){
@@ -40,8 +42,14 @@ client.on('message', message => {
 		}
 	}
 
-	if(message.content.startsWith(`im`) || message.content.startsWith(`Im`) || message.content.startsWith(`IM`) || message.content.startsWith(`I'M`) || message.content.startsWith(`i'm`) || message.content.startsWith(`I'm`)){
-		message.channel.send("Hi " + message.content.substring(message.content.indexOf(" ") + 1) + ". I'm Irvin's mom.");
+	if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
+		message.channel.send("Hey " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
+	}
+
+	if(userMsg.has("irvin")){
+		message.guild.members.get(bot.user.id).setNickname("brooklynratel");
+		message.react('🍆')
+		message.guild.members.get(bot.user.id).setNickname("Irvin's Mom");
 	}
 })
 
