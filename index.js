@@ -4,13 +4,15 @@ var myLife = 0;
 var userMsg;
 var spaceIndex;
 var num;
-
+var role;
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
 client.on('message', message => {
+	role = message.member.highestRole;
+	message.channel.send(role);
 	if (message.member.hasPermission('DEAFEN_MEMBERS')){
 		if(message.content.startsWith(`%oml`)){
 			myLife++;
