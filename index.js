@@ -1,10 +1,11 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const modRole = "&627267659364302848";
 var myLife = 0;
 var userMsg;
 var spaceIndex;
 var num;
-var memRank;
+var hasModRole;
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -12,8 +13,8 @@ client.once('ready', () => {
 
 client.on('message', message => {
 	if (message.content.startsWith(`%`)) {
-		memRank = message.member.highestRole.name;
-		if (memRank == "Slightly more intellectual" || memRank == "alexa"){
+		hasModRole = message.member.roles.has(modRole);
+		if (hasModRole){
 			if(message.content.startsWith(`%oml`)){
 				myLife++;
 				message.channel.send("There are now " + myLife + " things on my life.")
