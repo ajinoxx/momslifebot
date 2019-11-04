@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const modRole = '627267659364302848';
+const defaultAvatar = "https://miro.medium.com/max/1200/1*pHb0M9z_UMhO22HlaOl2zw.jpeg";
 var myLife = 0;
 var userMsg;
 var spaceIndex;
@@ -20,7 +21,7 @@ client.on('message', message => {
 		if (hasModRole){
 			if(message.content.startsWith(`%oml`)){
 				myLife++;
-				message.channel.send("There are now " + myLife + " things on my life.")
+				message.channel.send("There are now " + myLife + " things on my life.");
 			}
 			else if(message.content.startsWith(`%setoml`)){
 				userMsg = message.content;
@@ -28,18 +29,18 @@ client.on('message', message => {
 				num = userMsg.substring(spaceIndex);
 				if (!(isNaN(num))) {
 					myLife = num;
-					message.channel.send("There are now " + myLife + " things on my life.")
+					message.channel.send("There are now " + myLife + " things on my life.");
 				}
 				else {
 					message.channel.send("Not a valid number!");
 				}
 			}
 			else if(message.content.startsWith(`%count`)){
-				message.channel.send("There are " + myLife + " things on my life right now.")
+				message.channel.send("There are " + myLife + " things on my life right now.");
 			}
 		}
 		else{
-		message.channel.send("You are too stupid for this command!")
+		message.channel.send("You are too stupid for this command!");
 		}
 	}
 
@@ -47,12 +48,14 @@ client.on('message', message => {
 		message.channel.send("Hey " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
 	}
 
-	hasIrvin = userMsg.indexOf("irvin")
+	hasIrvin = userMsg.indexOf("irvin");
 
 	if(!(hasIrvin == -1) && !(message.author.id == '640607782571081741')){
 		message.guild.members.get('640607782571081741').setNickname("brooklynratel");
-		message.react('🍆')
+		client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png");
+		message.channel.send("😍 Irvin");
 		message.guild.members.get('640607782571081741').setNickname("Irvin's Mom");
+		client.user.setAvatar(defaultAvatar);
 	}
 })
 
