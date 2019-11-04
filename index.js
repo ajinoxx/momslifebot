@@ -48,7 +48,7 @@ client.on('message', message => {
 				message.channel.send("There are " + myLife + " things on my life right now.");
 			}
 			else if(message.content.startsWith(`%mute`)){
-				message.guild.members.get('640607782571081741').addRole("Muted")
+				message.guild.members.get('640607782571081741').addRole('543921175722721289');
 			}
 		}
 		else{
