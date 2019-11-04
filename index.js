@@ -45,7 +45,7 @@ client.on('message', message => {
 	}
 
 	if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
-		message.channel.send("Hey " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
+		message.channel.send("Nǐ hǎo " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
 	}
 
 	hasIrvin = userMsg.indexOf("irvin");
