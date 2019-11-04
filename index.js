@@ -63,7 +63,7 @@ client.on('message', message => {
 	hasNWord = userMsg.indexOf("nig")
 	
 	if(!(hasNWord == -1)){
-		message.react(':thumbdown::skin-tone-5:')
+		message.react('👎🏿')
 	}
 })
 
