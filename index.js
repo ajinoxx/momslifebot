@@ -40,7 +40,7 @@ client.on('message', message => {
 	}
 
 	if(message.content.startsWith(`im`) || message.content.startsWith(`Im`) || message.content.startsWith(`IM`) || message.content.startsWith(`I'M`) || message.content.startsWith(`i'm`) || message.content.startsWith(`I'm`)){
-		message.channel.send("Hi " + message.content.substring(message.content.indexOf(" ")) + ". I'm Irvin's mom.");
+		message.channel.send("Hi " + message.content.substring(message.content.indexOf(" ") + 1) + ". I'm Irvin's mom.");
 	}
 })
 
