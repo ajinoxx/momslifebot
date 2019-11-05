@@ -26,7 +26,9 @@ client.once('ready', () => {
 
 client.on('message', message => {
 	userMsg = message.content.toLowerCase();
-	if (message.content.startsWith(`%`)) {
+
+	if (message.content.startsWith(`%`)) {		
+		irvinID = message.guild.members.get("398613568213483521");
 		hasModRole = message.member.roles.has(modRole);
 		if (hasModRole){
 			if(message.content.startsWith(`%oml`)){
@@ -49,9 +51,14 @@ client.on('message', message => {
 				message.channel.send("There are " + myLife + " things on my life right now.");
 			}
 			else if(message.content.startsWith(`%mute`)){
-				irvinID = message.guild.members.get("398613568213483521");
 				irvinID.addRole('549064305807589387');
+				irvinID.removeRole('543187460021288960')
 				message.channel.send("Irvin is now muted.");
+			}
+			else if(message.content.startsWith(`%unmute`)){
+				irvinID.addRole('543187460021288960');
+				irvinID.removeRole('549064305807589387')
+				message.channel.send("Irvin is now unmuted.");
 			}
 		}
 		else{
