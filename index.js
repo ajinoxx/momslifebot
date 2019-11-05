@@ -11,7 +11,6 @@ var num;
 var hasModRole;
 var userMsg;
 var hasIrvin;
-var hasNWord;
 var randomNum;
 
 //function changeName() {
@@ -96,9 +95,7 @@ client.on('message', message => {
 		message.react('😍');
 	}
 
-	hasNWord = userMsg.indexOf("nig")
-
-	if(!(hasNWord == -1)){
+	if(userMsg.indexOf("nigger") != -1 || userMsg.indexOf("nigga") != -1 || userMsg.indexOf("nigbag") != -1 || userMsg.indexOf("nword") != -1 || userMsg.indexOf("n-word") != -1 || userMsg.indexOf("n word") != -1 || userMsg.indexOf("czarnuch") != -1){
 		message.react('👎🏿')
 	}
 })
