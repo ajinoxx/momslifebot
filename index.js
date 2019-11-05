@@ -21,13 +21,13 @@ var randomNum;
 //	client.user.setAvatar(defaultAvatar)
 //}
 
-function wait(ms)
-{
-var d = new Date();
-var d2 = null;
-do { d2 = new Date(); }
-while(d2-d < ms);
-}
+//function wait(ms)
+//{
+//var d = new Date();
+//var d2 = null;
+//do { d2 = new Date(); }
+//while(d2-d < ms);
+//}
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -92,15 +92,17 @@ client.on('message', message => {
 
 	if(hasIrvin != -1 && message.author.id != '640607782571081741'){
 		message.react('😍');
-		message.guild.members.get('640607782571081741').setNickname("brooklynratel");
-		wait(100);                                          
-		client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png"); 
-		wait(200); 
-		message.channel.send("😍 Irvin"); 
-		wait(100);
-		message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
-		wait(500)
-		client.user.setAvatar(defaultAvatar)
+		message.channel.send({files : ["https://i.imgur.com/eu011Sl.png"]})
+		
+		//message.guild.members.get('640607782571081741').setNickname("brooklynratel");
+		//wait(100);                                          
+		//client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png"); 
+		//wait(200); 
+		//message.channel.send("😍 Irvin"); 
+		//wait(100);
+		//message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
+		//wait(10000)
+		//client.user.setAvatar(defaultAvatar)
 	}
 	else if( message.author.id == '398613568213483521'){
 		message.react('😍');
