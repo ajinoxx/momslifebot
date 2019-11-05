@@ -21,6 +21,14 @@ var randomNum;
 //	client.user.setAvatar(defaultAvatar)
 //}
 
+function wait(ms)
+{
+var d = new Date();
+var d2 = null;
+do { d2 = new Date(); }
+while(d2-d < ms);
+}
+
 client.once('ready', () => {
 	console.log('Ready!');
 });
@@ -76,20 +84,23 @@ client.on('message', message => {
 	if(userMsg.startsWith(`can a kangaroo jump higher than a house`)){
 		message.channel.send("Of course! Houses can't jump!");
 	}
-
-	if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
+	else if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
 		message.channel.send("Nǐ hǎo " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
 	}
 
 	hasIrvin = userMsg.indexOf("irvin");
 
-	if(!(hasIrvin == -1) && !(message.author.id == '640607782571081741')){
-		//message.guild.members.get('640607782571081741').setNickname("brooklynratel");                                          //iffy
-		//client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png");  //iffy
-		//message.channel.send("😍 Irvin");                                                                                    //iffy
-		//setTimeout(changeName, 1000);                                                                                        //iffy
-		//setTimeout(changeAvatar, 1000);                                                                                     //iffy
+	if(hasIrvin != -1 && message.author.id != '640607782571081741'){
 		message.react('😍');
+		message.guild.members.get('640607782571081741').setNickname("brooklynratel");
+		wait(1000);                                          
+		client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png"); 
+		wait(2000); 
+		message.channel.send("😍 Irvin"); 
+		wait(1000);
+		message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
+		wait(5000)
+		client.user.setAvatar(defaultAvatar)
 	}
 	else if( message.author.id == '398613568213483521'){
 		message.react('😍');
