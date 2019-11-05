@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const modRole = '627267659364302848';
 const defaultAvatar = "https://miro.medium.com/max/1200/1*pHb0M9z_UMhO22HlaOl2zw.jpeg";
+var { jokes } = require('./jokes.json');
 var irvinID;
 var myLife = 0;
 var userMsg;
@@ -11,14 +12,15 @@ var hasModRole;
 var userMsg;
 var hasIrvin;
 var hasNWord;
+var randomNum;
 
-function changeName() {
-	message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
-}
+//function changeName() {
+//	message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
+//}
 
-function changeAvatar() {
-	client.user.setAvatar(defaultAvatar)
-}
+//function changeAvatar() {
+//	client.user.setAvatar(defaultAvatar)
+//}
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -60,10 +62,20 @@ client.on('message', message => {
 				irvinID.removeRole('549064305807589387')
 				message.channel.send("Irvin is now unmuted.");
 			}
+			else if(message.content.startsWith(`%joke`)){
+				randomNum = Math.random();
+				randomNum *= 82;
+				randomNum = Math.ceil(randomNum);
+				message.channel.send(jokes[randomNum]);
+			}
 		}
 		else{
 		message.channel.send("You are too stupid for this command!");
 		}
+	}
+
+	if(userMsg.startsWith(`can a kangaroo jump higher than a house`)){
+		message.channel.send("Of course! Houses can't jump!");
 	}
 
 	if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
