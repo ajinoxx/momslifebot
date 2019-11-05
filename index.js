@@ -93,13 +93,13 @@ client.on('message', message => {
 	if(hasIrvin != -1 && message.author.id != '640607782571081741'){
 		message.react('😍');
 		message.guild.members.get('640607782571081741').setNickname("brooklynratel");
-		wait(1000);                                          
+		wait(100);                                          
 		client.user.setAvatar("https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png"); 
-		wait(2000); 
+		wait(200); 
 		message.channel.send("😍 Irvin"); 
-		wait(1000);
+		wait(100);
 		message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
-		wait(5000)
+		wait(500)
 		client.user.setAvatar(defaultAvatar)
 	}
 	else if( message.author.id == '398613568213483521'){
