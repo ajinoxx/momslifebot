@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const modRole = '627267659364302848';
 const defaultAvatar = "https://miro.medium.com/max/1200/1*pHb0M9z_UMhO22HlaOl2zw.jpeg";
-var irvin;
+var irvinID;
 var myLife = 0;
 var userMsg;
 var spaceIndex;
@@ -49,8 +49,8 @@ client.on('message', message => {
 				message.channel.send("There are " + myLife + " things on my life right now.");
 			}
 			else if(message.content.startsWith(`%mute`)){
-				irvin = message.guild.memebers.get('398613568213483521');
-				irvin.addRole('549064305807589387');
+				irvinID = message.guild.members.get("398613568213483521");
+				irvinID.addRole('549064305807589387');
 				message.channel.send("Irvin is now muted.");
 			}
 		}
