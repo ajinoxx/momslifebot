@@ -71,7 +71,7 @@ client.on('message', message => {
 			}
 			else if(message.content.startsWith(`%joke`)){
 				randomNum = Math.random();
-				randomNum *= 83;
+				randomNum *= 84;
 				randomNum = Math.ceil(randomNum);
 				message.channel.send(jokes[randomNum]);
 			}
