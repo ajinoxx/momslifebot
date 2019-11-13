@@ -32,6 +32,7 @@ var randomNum;
 //setTimeout(function(){ 
     //Code
  //}, 5000); //time in milliseconds
+//try using promises or awaits https://discordjs.guide/additional-info/async-await.html#execution-with-discord-js-code
 
 client.once('ready', () => {
 	console.log('Ready!');
