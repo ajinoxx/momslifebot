@@ -28,6 +28,10 @@ var randomNum;
 //while(target > time) {
 // time = new Date();
 //}
+//Try putting this into each instance of wanting to wait
+//setTimeout(function(){ 
+    //Code
+ //}, 5000); //time in milliseconds
 
 client.once('ready', () => {
 	console.log('Ready!');
