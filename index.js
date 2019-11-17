@@ -15,6 +15,7 @@ var hasModRole;
 var userMsg;
 var hasIrvin;
 var randomNum;
+var mentionID;
 
 //function changeName() {
 //	message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
@@ -63,15 +64,15 @@ client.once('ready', () => {
 client.on('message', message => {
 	userMsg = message.content.toLowerCase();
 
-	if (message.content.startsWith(`%`)) {		
+	if (message.content.startsWith('%')) {		
 		irvinID = message.guild.members.get("398613568213483521");
 		hasModRole = message.member.roles.has(modRole);
 		if (hasModRole){
-			if(message.content.startsWith(`%oml`)){
+			if(message.content.startsWith('%oml')){
 				myLife++;
 				message.channel.send("There are now " + myLife + " things on my life.");
 			}
-			else if(message.content.startsWith(`%setoml`)){
+			else if(message.content.startsWith('%setoml')){
 				userMsg = message.content;
 				spaceIndex = userMsg.indexOf(" ") + 1;
 				num = userMsg.substring(spaceIndex);
@@ -83,26 +84,26 @@ client.on('message', message => {
 					message.channel.send("Not a valid number!");
 				}
 			}
-			else if(message.content.startsWith(`%count`)){
+			else if(message.content.startsWith('%count')){
 				message.channel.send("There are " + myLife + " things on my life right now.");
 			}
-			else if(message.content.startsWith(`%mute`)){
+			else if(message.content.startsWith('%mute')){
 				irvinID.addRole('549064305807589387');
 				irvinID.removeRole('543187460021288960')
 				message.channel.send("Irvin is now muted.");
 			}
-			else if(message.content.startsWith(`%unmute`)){
+			else if(message.content.startsWith('%unmute')){
 				irvinID.addRole('543187460021288960');
 				irvinID.removeRole('549064305807589387')
 				message.channel.send("Irvin is now unmuted.");
 			}
-			else if(message.content.startsWith(`%joke`)){
+			else if(message.content.startsWith('%joke')){
 				randomNum = Math.random();
 				randomNum *= 83;
 				randomNum = Math.ceil(randomNum);
 				message.channel.send(jokes[randomNum]);
 			}
-			else if(message.content.startsWith(`%irvintime`)){
+			else if(message.content.startsWith('%irvintime')){
 				if (irvinTime + 600000 < message.createdTimestamp)
 					timePassed = true;
 				else
@@ -121,12 +122,39 @@ client.on('message', message => {
 		else{
 		message.channel.send("You are too stupid for this command!");
 		}
+		if(message.content.startsWith('%massage')){
+			try {
+				spaceIndex = message.content.indexOf(" ");
+				mentionID = message.content.substring(spaceIndex + 1);
+				if (mentionID.startsWith('<@') && mentionID.endsWith('>')){
+					mentionID = mentionID.slice(2, -1);
+					if (mentionID.startsWith('!')){
+						mentionID = mentionID.substring(1);
+					}
+					mention = message.guild.members.get(mentionID)
+					randomNum = Math.random() * 100;
+					if (randomNum > 50 ){
+						message.channel.send(mention + " has some nasty feet");
+						message.channel.send({files :  ["https://tenor.com/view/toenails-fail-feet-pedicure-trendizisst-gif-14641265.gif"]})
+					}
+					else{
+						message.channel.send(mention + " has some tasty toes");
+						message.channel.send({files :  ["https://media.giphy.com/media/CzMfYqt8oomnm/giphy.gif"]})
+					}
+				}
+				
+			}
+			catch(error){
+				message.channel.send("Make sure you did %massage @user");
+				console.log(error);
+			}
+		}
 	}
 
-	if(userMsg.startsWith(`can a kangaroo jump higher than a house`)){
+	if(userMsg.startsWith('can a kangaroo jump higher than a house')){
 		message.channel.send("Of course! Houses can't jump!");
 	}
-	else if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
+	else if(userMsg.startsWith('im') || userMsg.startsWith("i'm")){
 		message.channel.send("Nǐ hǎo " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
 	}
 
