@@ -1,67 +1,77 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+
 const modRole = '627267659364302848';
+const intelRole = '543187460021288960';
+var hasModRole;
+
 const defaultAvatar = "https://miro.medium.com/max/1200/1*pHb0M9z_UMhO22HlaOl2zw.jpeg";
 const brooklynAvatar = "https://cdn.discordapp.com/avatars/631311221148352569/09477abfb49a707c02ae6c0f1618b836.png";
+
+var { jokes } = require('./jokes.json');
+
 var irvinTime = null;
 var timePassed;
-var { jokes } = require('./jokes.json');
 var irvinID;
-var myLife = 0;
-var userMsg;
-var spaceIndex;
-var num;
-var hasModRole;
-var userMsg;
 var hasIrvin;
-var randomNum;
+
 var mentionID;
 
-//function changeName() {
-//	message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
+var myLife = 0;
+
+var userMsg;
+
+var spaceIndex;
+
+var setNum;
+
+var randomNum;
+
+//function wait(ms)
+//{
+//var d = new Date(); //get time of calling
+//var d2 = null;
+//do {
+//	d2 = new Date(); //get current time
 //}
-
-//function changeAvatar() {
-//	client.user.setAvatar(defaultAvatar)
+//while(d2-d < ms); //while the difference between the current time and the intial time is less than the input
 //}
-
-function wait(ms)
-{
-var d = new Date(); //get time of calling
-var d2 = null;
-do {
-	d2 = new Date(); //get current time
-}
-while(d2-d < ms); //while the difference between the current time and the intial time is less than the input
-}
-
-function cloneBrooklyn(){
-	message.react('😍');
-	//message.channel.send({files : ["https://i.imgur.com/eu011Sl.png"]}) //sends pic of brooklyn replying
-	
-	message.guild.members.get('640607782571081741').setNickname("brooklynratel")
-	.then(() => //waits til nickname is changed
-	client.user.setAvatar(brooklynAvatar))
-	.then(() => //waits til avatar is changed
-	message.channel.send("😍 Irvin"))
-	.then(() => //waits til the message is successfully sent
-	message.guild.members.get('640607782571081741').setNickname("Irvin's Mom"))
-	.then(() => //waits til nickname is changed again
-	setTimeout(function(){ 
-		client.user.setAvatar(defaultAvatar)
-	 }, 10000)) //waits for 10 seconds to change the avatar back to the default
-	.catch(error => { //if anything goes bad, send message and log it in the console
-		message.channel.send("Someting went wong!")
-		console.log(error)
-	});
-	irvinTime = new Date(); //get time of when the process is successfully completed
-}
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
+client.on('guildMemberAdd', (member) => {
+	member.addRole(intelRole);
+	member.guild.channels.get('543185885232103436').send(member + " is now in possession of a big brain.")
+});
+
+client.on('guildMemberRemove', (member) => {
+	member.guild.channels.get('543185885232103436').send(member + "is no longer an intellectual.")
+});
+
 client.on('message', message => {
+	
+	function cloneBrooklyn(){
+		//message.channel.send({files : ["https://i.imgur.com/eu011Sl.png"]}) //sends pic of brooklyn replying
+		message.guild.members.get('640607782571081741').setNickname("brooklynratel")
+		.then(() => //waits til nickname is changed
+			client.user.setAvatar(brooklynAvatar))
+		.then(() => //waits til avatar is changed
+			message.channel.send("😍 Irvin"))
+		.then(() => //waits til the message is successfully sent
+			message.guild.members.get('640607782571081741').setNickname("Irvin's Mom"))
+		.then(() => //waits til nickname is changed again	
+			client.user.setAvatar(defaultAvatar))
+		.catch(error => { //if anything goes bad, send message and log it in the console, then set the nickname back
+			message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
+			.then(() =>//waits til nickname is switched back to send error
+				message.channel.send("Sumting wong!")) 
+			console.log(error)
+		});
+		irvinTime = message.createdTimestamp; //get time of when the process is successfully completed
+	}
+
 	userMsg = message.content.toLowerCase();
 
 	if (message.content.startsWith(`%`)) {		
@@ -75,9 +85,9 @@ client.on('message', message => {
 			else if(message.content.startsWith(`%setoml`)){
 				userMsg = message.content;
 				spaceIndex = userMsg.indexOf(" ") + 1;
-				num = userMsg.substring(spaceIndex);
-				if (!(isNaN(num))) {
-					myLife = num;
+				setNum = userMsg.substring(spaceIndex);
+				if (!(isNaN(setNum))) {
+					myLife = setNum;
 					message.channel.send("There are now " + myLife + " things on my life.");
 				}
 				else {
@@ -89,29 +99,29 @@ client.on('message', message => {
 			}
 			else if(message.content.startsWith(`%mute`)){
 				irvinID.addRole('549064305807589387');
-				irvinID.removeRole('543187460021288960')
+				irvinID.removeRole(intelRole)
 				message.channel.send("Irvin is now muted.");
 			}
 			else if(message.content.startsWith(`%unmute`)){
-				irvinID.addRole('543187460021288960');
+				irvinID.addRole(intelRole);
 				irvinID.removeRole('549064305807589387')
 				message.channel.send("Irvin is now unmuted.");
 			}
 			else if(message.content.startsWith(`%joke`)){
 				randomNum = Math.random();
-				randomNum *= 83;
+				randomNum *= 82;
 				randomNum = Math.ceil(randomNum);
 				message.channel.send(jokes[randomNum]);
 			}
-			else if(message.content.startsWith(`%irvintime`)){
+			else if(message.content.startsWith(`%itime`)){
 				if (irvinTime + 600000 < message.createdTimestamp)
 					timePassed = true;
 				else
 					timePassed = false;
-				message.channel.send("irvinTime value (createdTimestamp): " + irvinTime);
-				message.channel.send("has 10 mins passed (createdTimestamp): " + timePassed);
-				message.channel.send("createdTimestamp difference: " + (irvinTime - message.createdTimestamp))
-				message.channel.send("createdAt difference: " + (irvinTime - message.createdAt))
+				message.channel.send("irvinTime value (createdTimestamp): " + irvinTime + 
+					"\nhas 10 mins passed (createdTimestamp): " + timePassed + 
+					"\ncreatedTimestamp difference: " + (irvinTime - message.createdTimestamp) +
+					"\ncreatedAt difference: " + (irvinTime - message.createdAt));
 				if (irvinTime + 600000 < message.createdAt)
 					timePassed = true;
 				else
@@ -164,45 +174,11 @@ client.on('message', message => {
 		message.react('😍');
 	}
 
-	if (hasIrvin != -1 && message.author.id != '640607782571081741' && irvinTime == null){//checks to see if irvin is in message, author isnt bot, and if this is the first time occuring
-		//message.channel.send({files : ["https://i.imgur.com/eu011Sl.png"]}) //sends pic of brooklyn replying
-		message.guild.members.get('640607782571081741').setNickname("brooklynratel")
-		.then(() => //waits til nickname is changed
-			client.user.setAvatar(brooklynAvatar))
-		.then(() => //waits til avatar is changed
-			message.channel.send("😍 Irvin"))
-		.then(() => //waits til the message is successfully sent
-			message.guild.members.get('640607782571081741').setNickname("Irvin's Mom"))
-		.then(() => //waits til nickname is changed again	
-			client.user.setAvatar(defaultAvatar))
-		.catch(error => { //if anything goes bad, send message and log it in the console, then set the nickname back
-			message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
-			.then(() =>//waits til nickname is switched back to send error
-				message.channel.send("Sumting wong!")) 
-			console.log(error)
-		});
-		irvinTime = message.createdTimestamp; //get time of when the process is successfully completed
-	}
-	else if(hasIrvin != -1 && message.author.id != '640607782571081741' && message.createdAt > irvinTime + 600000){ //checks to see if irvin is in message, author isnt bot, and that 10 mins have passed
-		//message.channel.send({files : ["https://i.imgur.com/eu011Sl.png"]}) //sends pic of brooklyn replying
-		message.guild.members.get('640607782571081741').setNickname("brooklynratel")
-		.then(() => //waits til nickname is changed
-			client.user.setAvatar(brooklynAvatar))
-		.then(() => //waits til avatar is changed
-			message.channel.send("😍 Irvin"))
-		.then(() => //waits til the message is successfully sent
-			message.guild.members.get('640607782571081741').setNickname("Irvin's Mom"))
-		.then(() => //waits til nickname is changed again
-			client.user.setAvatar(defaultAvatar))
-		.catch(error => { //if anything goes bad, send message and log it in the console, then set the nickname back
-			message.guild.members.get('640607782571081741').setNickname("Irvin's Mom")
-			.then(() =>//waits til nickname is switched back to send error
-				message.channel.send("Sumting wong!"))
-			console.log(error)
-		});
-		irvinTime = message.createdTimestamp; //get time of when the process is successfully completed
-	}
-
+	if (hasIrvin != -1 && message.author.id != '640607782571081741' && irvinTime == null) //checks to see if irvin is in message, author isnt bot, and if this is the first time occuring
+		cloneBrooklyn();
+	else if(hasIrvin != -1 && message.author.id != '640607782571081741' && message.createdAt > irvinTime + 600000) //checks to see if irvin is in message, author isnt bot, and that 10 mins have passed
+		cloneBrooklyn();
+	
 	if(userMsg.indexOf("nigger") != -1 || userMsg.indexOf("nigga") != -1 || userMsg.indexOf("nigbag") != -1 || userMsg.indexOf("nword") != -1 || userMsg.indexOf("n-word") != -1 || userMsg.indexOf("n word") != -1 || userMsg.indexOf("czarnuch") != -1){
 		message.react('👎🏿')
 	}
