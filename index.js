@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+const prefix = "%"
+
 const modRole = '627267659364302848';
 const intelRole = '543187460021288960';
 var hasModRole;
@@ -12,17 +14,11 @@ var { jokes } = require('./jokes.json');
 
 var irvinTime = null;
 var timePassed;
+
 var irvinID;
 var hasIrvin;
 
-var mentionID;
-
 var myLife = 0;
-
-var userMsg;
-
-var spaceIndex;
-
 var setNum;
 
 var randomNum;
@@ -36,6 +32,8 @@ var randomNum;
 //}
 //while(d2-d < ms); //while the difference between the current time and the intial time is less than the input
 //}
+
+
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -51,7 +49,29 @@ client.on('guildMemberRemove', (member) => {
 });
 
 client.on('message', message => {
-	
+	//variables that get declared every message
+	var userMsg = message.content.toLowerCase();
+	var targetID;
+	var targetMention;
+
+	function postOMLEmbed(){
+		if (command.length > 1) //if there are more than 1 things in the command array
+			if(!isNaN(command[1])) //if the 2nd value is a number
+				myLife = command[1]; //set the 2nd value to the counter (setoml command)
+			else{//if the 2nd value isnt a number
+				message.channel.send("Please enter a valid number!")
+				return;
+			}
+		else if (command[0] == "oml")//if the command is just oml
+			myLife++;//add one to the counter
+		const omlEmbed = new Discord.RichEmbed()//create embed
+		.setColor('#fae739')
+		.setTitle('Number of things on my life:')
+		.setDescription(myLife)
+
+		message.channel.send(omlEmbed)//send embed
+	}
+
 	function cloneBrooklyn(){
 		//message.channel.send({files : ["https://i.imgur.com/eu011Sl.png"]}) //sends pic of brooklyn replying
 		message.guild.members.get('640607782571081741').setNickname("brooklynratel")
@@ -72,48 +92,107 @@ client.on('message', message => {
 		irvinTime = message.createdTimestamp; //get time of when the process is successfully completed
 	}
 
-	userMsg = message.content.toLowerCase();
+	function findID(){
+		try{
+			var mentionID = command[1]//grab the mentioned person's ID with the <@! and >
+			if (mentionID.startsWith('<@') && mentionID.endsWith('>')){//if the ID starts with <@ and ends with >
+				mentionID = mentionID.slice(2, -1);//cuts off the <@ and >
+				if (mentionID.startsWith('!')){//if the ID still starts with the ! (caused by custom nicknames)
+					mentionID = mentionID.substring(1);//cuts off the ! in the beginning
+				}
+			}
+			return mentionID;//return with that pure ID number
+		}
+		catch(error){
+			message.channel.send("Make sure you mentioned a user!");
+			console.log(error);
+			return;
+		}
+	}
 
-	if (message.content.startsWith(`%`)) {		
+	function findMention(ID){
+		return message.guild.members.get(ID);
+	}
+
+	if (message.content.startsWith(`${prefix}`)) {		
 		irvinID = message.guild.members.get("398613568213483521");
 		hasModRole = message.member.roles.has(modRole);
 		if (hasModRole){
-			if(message.content.startsWith(`%oml`)){
-				myLife++;
-				message.channel.send("There are now " + myLife + " things on my life.");
+			var command = userMsg.substring(prefix.length).split(" ");
+			if(command[0] == "oml" || command[0] == "count" || command[0] == "setoml"){ //if the command is either of these
+				postOMLEmbed() //call the function to create and post the embed
+				message.guild.channels.get('645817145007144981').send(findMention(message.author.id) + " changed the OML counter");
+				return;
 			}
-			else if(message.content.startsWith(`%setoml`)){
-				userMsg = message.content;
-				spaceIndex = userMsg.indexOf(" ") + 1;
-				setNum = userMsg.substring(spaceIndex);
-				if (!(isNaN(setNum))) {
-					myLife = setNum;
-					message.channel.send("There are now " + myLife + " things on my life.");
+			try{
+				if(command[0] == "mute"){
+					if (command.length > 1){
+						targetID = findID();
+						message.guild.members.get(targetID).addRole('549064305807589387');
+						message.guild.members.get(targetID).removeRole(intelRole);
+						const muteEmbed = new Discord.RichEmbed()
+						.setColor('#fae739')
+						.setTitle(message.guild.members.get(targetID).displayName + " is now muted")
+						.setThumbnail(message.guild.members.get(targetID).user.avatarURL)
+
+						message.channel.send(muteEmbed)
+						message.guild.channels.get('645817145007144981').send(findMention(message.author.id) + " muted " + command[1]);
+						return;
+					}
+					else {
+						irvinID.addRole('549064305807589387');
+						irvinID.removeRole(intelRole)
+						const imuteEmbed = new Discord.RichEmbed()
+						.setColor('#fae739')
+						.setTitle("Irvin is now muted")
+						.setThumbnail(irvinID.user.avatarURL)
+
+						message.channel.send(imuteEmbed)
+						message.guild.channels.get('645817145007144981').send(findMention(message.author.id) + " muted Irvin");
+						return;
+					}
 				}
-				else {
-					message.channel.send("Not a valid number!");
+				else if(command[0] == "unmute"){
+					if (command.length > 1){
+						targetID = findID();
+						message.guild.members.get(targetID).removeRole('549064305807589387');
+						message.guild.members.get(targetID).addRole(intelRole);
+						const unmuteEmbed = new Discord.RichEmbed()
+						.setColor('#fae739')
+						.setTitle(message.guild.members.get(targetID).displayName + " is now unmuted")
+						.setThumbnail(message.guild.members.get(targetID).user.avatarURL)
+
+						message.channel.send(unmuteEmbed)
+						message.guild.channels.get('645817145007144981').send(findMention(message.author.id) + " unmuted " + command[1]);
+						return;
+					}
+					else {
+						irvinID.removeRole('549064305807589387');
+						irvinID.addRole(intelRole)
+						const iunmuteEmbed = new Discord.RichEmbed()
+						.setColor('#fae739')
+						.setTitle("Irvin is now unmuted")
+						.setThumbnail(irvinID.user.avatarURL)
+
+						message.channel.send(iunmuteEmbed)
+						message.guild.channels.get('645817145007144981').send(findMention(message.author.id) + " unmuted Irvin");
+						return;
+					}
 				}
 			}
-			else if(message.content.startsWith(`%count`)){
-				message.channel.send("There are " + myLife + " things on my life right now.");
+			catch(error){
+				console.log(error);
+				message.channel.send("Unable to mute. \nMake sure you correctly mentioned a user!")
+				return;
 			}
-			else if(message.content.startsWith(`%mute`)){
-				irvinID.addRole('549064305807589387');
-				irvinID.removeRole(intelRole)
-				message.channel.send("Irvin is now muted.");
-			}
-			else if(message.content.startsWith(`%unmute`)){
-				irvinID.addRole(intelRole);
-				irvinID.removeRole('549064305807589387')
-				message.channel.send("Irvin is now unmuted.");
-			}
-			else if(message.content.startsWith(`%joke`)){
+			if(command[0] == "joke"){
 				randomNum = Math.random();
 				randomNum *= 82;
 				randomNum = Math.ceil(randomNum);
 				message.channel.send(jokes[randomNum]);
+				return;
 			}
-			else if(message.content.startsWith(`%itime`)){
+			if(command[0] == "itime"){
 				if (irvinTime + 600000 < message.createdTimestamp)
 					timePassed = true;
 				else
@@ -127,42 +206,34 @@ client.on('message', message => {
 				else
 					timePassed = false;
 				message.channel.send("has 10 mins passed (createdAt): " + timePassed)
+				return;
 			}
 		}
 		else{
 		message.channel.send("You are too stupid for this command!");
+		return;
 		}
-		if(message.content.startsWith(`%massage`)){
-			try {
-				spaceIndex = message.content.indexOf(" ");
-				mentionID = message.content.substring(spaceIndex + 1);
-				if (mentionID.startsWith('<@') && mentionID.endsWith('>')){
-					mentionID = mentionID.slice(2, -1);
-					if (mentionID.startsWith('!')){
-						mentionID = mentionID.substring(1);
-					}
-					mention = message.guild.members.get(mentionID)
-					randomNum = Math.random() * 100;
-					if (randomNum > 50 ){
-						message.channel.send(mention + " has some nasty feet");
-						message.channel.send({files :  ["https://tenor.com/view/toenails-fail-feet-pedicure-trendizisst-gif-14641265.gif"]})
-					}
-					else{
-						message.channel.send(mention + " has some tasty toes");
-						message.channel.send({files :  ["https://media.giphy.com/media/CzMfYqt8oomnm/giphy.gif"]})
-					}
-				}
-				
+		if(command[0] == "massage"){
+			if(command.length > 1) //if there are more than 1 things in the command array
+				targetMention = command[1];	//the mentioned user
+			else //if there are less than 1 things in the command array
+				targetMention = message.guild.members.get(message.author.id); //use the author's mention tag
+			randomNum = Math.random() * 100;
+			if(randomNum > 50 ){
+				message.channel.send(targetMention + " has some nasty feet");
+				message.channel.send({files :  ["https://tenor.com/view/toenails-fail-feet-pedicure-trendizisst-gif-14641265.gif"]})
 			}
-			catch(error){
-				message.channel.send("Make sure you did %massage @user");
-				console.log(error);
+			else{
+				message.channel.send(targetMention + " has some tasty toes");
+				message.channel.send({files :  ["https://media.giphy.com/media/CzMfYqt8oomnm/giphy.gif"]})
 			}
+			return;
 		}
 	}
 
 	if(userMsg.startsWith(`can a kangaroo jump higher than a house`)){
 		message.channel.send("Of course! Houses can't jump!");
+		return;
 	}
 	else if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
 		message.channel.send("Nǐ hǎo " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
