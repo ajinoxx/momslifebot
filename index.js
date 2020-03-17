@@ -117,6 +117,10 @@ client.on('message', message => {
 	if (message.content.startsWith(`${prefix}`)) {		
 		irvinID = message.guild.members.get("398613568213483521");
 		hasModRole = message.member.roles.has(modRole);
+				if(command[0] == "cough") {
+			var roleMembers = message.guild.roles.get('543187460021288960').members();
+			message.channel.send(roleMembers);
+		}
 		if (hasModRole){
 			var command = userMsg.substring(prefix.length).split(" ");
 			if(command[0] == "oml" || command[0] == "count" || command[0] == "setoml"){ //if the command is either of these
