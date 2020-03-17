@@ -119,7 +119,7 @@ client.on('message', message => {
 		hasModRole = message.member.roles.has(modRole);
 		var command = userMsg.substring(prefix.length).split(" ");
 		if(command[0] == "cough") {
-			var roleMembers = message.guild.roles.get('543187460021288960').members();
+			var roleMembers = message.guild.roles.get('543187460021288960').members;
 			message.channel.send(roleMembers);
 		}
 		if (hasModRole){	
