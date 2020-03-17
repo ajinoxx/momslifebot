@@ -119,8 +119,9 @@ client.on('message', message => {
 		hasModRole = message.member.roles.has(modRole);
 		var command = userMsg.substring(prefix.length).split(" ");
 		if(command[0] == "cough") {
-			var roleMembers = message.guild.roles.get('543187460021288960').members;
-			message.channel.send(roleMembers);
+			var roleMembers = message.guild.roles.get("543187460021288960").members;
+			var r = Math.round(Math.random() * (roleMembers.size - 1));
+			message.channel.send(roleMembers[r]);
 		}
 		if (hasModRole){	
 			if(command[0] == "oml" || command[0] == "count" || command[0] == "setoml"){ //if the command is either of these
