@@ -117,12 +117,12 @@ client.on('message', message => {
 	if (message.content.startsWith(`${prefix}`)) {		
 		irvinID = message.guild.members.get("398613568213483521");
 		hasModRole = message.member.roles.has(modRole);
-				if(command[0] == "cough") {
+		var command = userMsg.substring(prefix.length).split(" ");
+		if(command[0] == "cough") {
 			var roleMembers = message.guild.roles.get('543187460021288960').members();
 			message.channel.send(roleMembers);
 		}
-		if (hasModRole){
-			var command = userMsg.substring(prefix.length).split(" ");
+		if (hasModRole){	
 			if(command[0] == "oml" || command[0] == "count" || command[0] == "setoml"){ //if the command is either of these
 				postOMLEmbed() //call the function to create and post the embed
 				message.guild.channels.get('645817145007144981').send(findMention(message.author.id) + " changed the OML counter");
