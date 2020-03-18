@@ -244,9 +244,9 @@ client.on('message', message => {
 		message.channel.send("Nǐ hǎo " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
 	}
 
-	hasIrvin = userMsg.indexOf("irvin");
+	hasIrvin = userMsg.includes("irvin");
 
-	if (hasIrvin != -1 && message.author.id != '640607782571081741' || message.author.id == '398613568213483521'){ //checks if message has irvin and the bot is not the author, or if irvin is the author
+	if (hasIrvin && message.author.id != '640607782571081741' || message.author.id == '398613568213483521'){ //checks if message has irvin and the bot is not the author, or if irvin is the author
 		message.react('😍');
 	}
 
@@ -255,7 +255,7 @@ client.on('message', message => {
 	//else if(hasIrvin != -1 && message.author.id != '640607782571081741' && message.createdAt > irvinTime + 600000) //checks to see if irvin is in message, author isnt bot, and that 10 mins have passed
 		//cloneBrooklyn();
 	
-	if(userMsg.indexOf("nigger") != -1 || userMsg.indexOf("nigga") != -1 || userMsg.indexOf("nigbag") != -1 || userMsg.indexOf("nword") != -1 || userMsg.indexOf("n-word") != -1 || userMsg.indexOf("n word") != -1 || userMsg.indexOf("czarnuch") != -1){
+	if(userMsg.includes("nigger") || userMsg.includes("nigga") || userMsg.includes("nigbag") || userMsg.includes("nword") || userMsg.includes("n-word") || userMsg.includes("n word") || userMsg.includes("czarnuch") || userMsg.includes("nig nog")){
 		message.react('👎🏿')
 	}
 })
