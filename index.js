@@ -250,10 +250,10 @@ client.on('message', message => {
 		message.react('😍');
 	}
 
-	if (hasIrvin != -1 && message.author.id != '640607782571081741' && irvinTime == null) //checks to see if irvin is in message, author isnt bot, and if this is the first time occuring
-		cloneBrooklyn();
-	else if(hasIrvin != -1 && message.author.id != '640607782571081741' && message.createdAt > irvinTime + 600000) //checks to see if irvin is in message, author isnt bot, and that 10 mins have passed
-		cloneBrooklyn();
+	//if (hasIrvin != -1 && message.author.id != '640607782571081741' && irvinTime == null) //checks to see if irvin is in message, author isnt bot, and if this is the first time occuring
+		//cloneBrooklyn();
+	//else if(hasIrvin != -1 && message.author.id != '640607782571081741' && message.createdAt > irvinTime + 600000) //checks to see if irvin is in message, author isnt bot, and that 10 mins have passed
+		//cloneBrooklyn();
 	
 	if(userMsg.indexOf("nigger") != -1 || userMsg.indexOf("nigga") != -1 || userMsg.indexOf("nigbag") != -1 || userMsg.indexOf("nword") != -1 || userMsg.indexOf("n-word") != -1 || userMsg.indexOf("n word") != -1 || userMsg.indexOf("czarnuch") != -1){
 		message.react('👎🏿')
