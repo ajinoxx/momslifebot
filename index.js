@@ -240,7 +240,7 @@ client.on('message', message => {
 		message.channel.send("Of course! Houses can't jump!");
 		return;
 	}
-	else if(userMsg.startsWith(`im`) || userMsg.startsWith(`i'm`)){
+	else if(userMsg.startsWith(`imma `) || userMsg.startsWith(`i'm `) || userMsg.startsWith(`im `)){
 		message.channel.send("Nǐ hǎo " + userMsg.substring(userMsg.indexOf(" ") + 1) + ", I'm Irvin's mom.");
 	}
 
