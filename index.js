@@ -254,10 +254,6 @@ client.on('message', message => {
 		//cloneBrooklyn();
 	//else if(hasIrvin != -1 && message.author.id != '640607782571081741' && message.createdAt > irvinTime + 600000) //checks to see if irvin is in message, author isnt bot, and that 10 mins have passed
 		//cloneBrooklyn();
-	
-	if(userMsg.includes("nigger") || userMsg.includes("nigga") || userMsg.includes("nigbag") || userMsg.includes("nword") || userMsg.includes("n-word") || userMsg.includes("n word") || userMsg.includes("czarnuch") || userMsg.includes("nig nog")){
-		message.react('👎🏿')
-	}
 })
 
 client.login(process.env.token);
